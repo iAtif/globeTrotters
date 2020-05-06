@@ -19,8 +19,15 @@ var commentRoutes 			= require("./routes/comments"),
 
 
 
-mongoose.connect("mongodb://localhost/globalTrotters", { useNewUrlParser: true, useUnifiedTopology: true });
-mongoose.createConnection("mongodb://localhost/globalTrotters", { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect("mongodb+srv://atifmongo:" + process.env.MONGOPW + "@cluster0-ow8kx.mongodb.net/test?retryWrites=true&w=majority",
+	{   useNewUrlParser: true,
+		 useCreateIndex: true
+	}).then(() => {
+		console.log('connected to DB!');
+}).catch(err => {
+	console.log('ERROR', err.message);
+});
+
 mongoose.set('useFindAndModify', false);
 
 //MOMENT CONFIGURATION - Time Tracker
@@ -32,7 +39,6 @@ app.use(require("express-session")({
 	resave: false,
 	saveUninitialized: false
 }));
-
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
