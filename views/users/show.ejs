@@ -1,0 +1,43 @@
+<%- include("../partial/header") %>
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-4">
+			<h1><%=user.firstName + " " + user.lastName%></h1>
+			<div id="user-profile" class="thumbnail">
+				<img src="<%= user.image %>" alt="user profile image">
+				<div class="caption text-center"><a href="mailto:<%= user.email %>"><%= user.email %></a></div>
+			</div>
+		</div>
+		<header class="jumbotron">
+			<div class="container">
+				<h2>About</h2>
+				<p><%= user.description %></p>
+				<% if(currentUser && user._id.equals(currentUser._id) || currentUser && currentUser.isAdmin) { %>
+					<a class="btn btn-primary" href="/users/<%= user._id %>/edit">Edit</a>
+				<% } %>
+			</div>
+		</header>
+
+		<div class="row">
+		<% for(i=0; i<photos.length ; i++){ %>
+			<div class="col-md-3 col-sm-6">
+				<div class="thumbnail">
+					<img src="<%= photos[i].image %>">
+					<div class="caption text-center">
+						<h4><%= photos[i].name %></h4>
+						<div>
+							<span class="badge label-primary"><i class="fas fa-thumbs-up"></i> <%= photos[i].likes.length %></span>
+						</div>
+					</div>
+					<p class="text-center">
+						<a href="/photos/<%= photos[i]._id %>" class="btn btn-primary">More Info</a>
+					</p>
+				</div>
+			</div>
+		<% }; %>
+		</div>
+	</div>
+</div>
+
+<%- include("../partial/footer") %>

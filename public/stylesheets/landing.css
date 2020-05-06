@@ -1,0 +1,98 @@
+body {
+  background-color: #000;
+}
+
+#landing-header {
+  z-index: 1;
+  position: relative;
+  text-align: center;
+  padding-top: 40vh;
+  text-shadow: 0px 1px 6px #000, -2px 1px 4px #000, -2px 1px 3px #000, -1px 1px 0 #000;
+}
+
+#landing-header h1 {
+  color: #fff;
+}
+
+#landing {
+	background-color: #263640;
+	    border-color: #3a2f11;
+}
+
+#landing:hover {
+	background-color: #263640;
+	    border-color: #3a2f11;
+}
+
+#landing:active {
+	background-color: #263640;
+	    border-color: #3a2f11;
+}
+
+.quote{
+	font-family: cursive;
+	color: #fbfbfb;
+}
+
+.slideshow {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.slideshow li {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-size: cover;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  opacity: 0;
+  z-index: 0;
+  animation: imageAnimation 50s linear infinite;
+}
+
+.slideshow li:nth-child(1) {
+  background-image: url(https://photolemur.com/uploads/blog/thierry-ambraisse-200857.jpg)
+}
+.slideshow li:nth-child(2) {
+  background-image: url(https://mymodernmet.com/wp/wp-content/uploads/2018/10/Mou-Aysha-portrait-photography-3.jpg);
+  animation-delay: 10s;
+}
+.slideshow li:nth-child(3) {
+  background-image: url(https://i.pinimg.com/originals/45/21/ec/4521ec0de6218819728cbb0e5eb3e133.jpg);
+  animation-delay: 20s;
+}
+.slideshow li:nth-child(4) {
+  background-image: url(https://i.pinimg.com/originals/97/ae/5d/97ae5d3667eea1edbd3c3de312c0c217.jpg);
+  animation-delay: 30s;
+}
+.slideshow li:nth-child(5) {
+  background-image: url(https://media.gq.com/photos/5b2eca05525bfc1dee1a684b/master/pass/180621_PMFWSS19-0770.jpg);
+  animation-delay: 40s;
+}
+
+@keyframes imageAnimation {
+  0% {
+    opacity: 0;
+    animation-timing-function: ease-in;
+  }
+  10% {
+    opacity: 1;
+    animation-timing-function: ease-out;
+  }
+  20% {
+    opacity: 1
+  }
+  30% {
+    opacity: 0
+  }
+}

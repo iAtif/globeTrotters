@@ -1,0 +1,26 @@
+<%- include("../partial/header") %>
+<div class="row">
+	<h1 style="text-align: center">Edit <%= photo.name %></h1>
+	<div style="width: 30%; margin: 25px auto;">
+		<form action="/photos/<%= photo._id %>?_method=PUT" method="POST" enctype="multipart/form-data">
+			<div class="form-group">
+				<input class="form-control" type="text" name="photo[name]" value="<%= photo.name %>">
+			</div>
+			<div class="form-group">
+				<label for="image">Image</label>
+				<input type="file" id="image" name="image" accept="image/*" required>
+			</div>
+			<div class="form-group">
+				<input class="form-control" type="text" name="photo[description]" value="<%= photo.description %>">
+			</div>
+			<div class="form-group">
+				<label for="location">Location</label>
+				<input class="form-control" type="text" name="location" id="location" value="<%= photo.location %>">
+			</div>
+			<div class="form-group">
+				<button id="btn-auth" class="btn btn-lg btn-primary btn-block">Submit!</button>
+			</div>
+		</form>
+	</div>
+</div>
+<%- include("../partial/footer") %>

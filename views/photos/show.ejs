@@ -1,0 +1,121 @@
+<%- include("../partial/header") %>
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-3">
+			<p class="lead">GlobeTrotters</p>
+		<div id="map"></div>
+		</div>
+		<div class="col-md-9">
+			<div class="thumbnail">
+				<img id="full-img" class="img-responsive" src="<%= photo.image %>">
+				<div class="caption-full">
+					<h4><a><%= photo.name %></a></h4>
+					<!-- Likes -->
+                    <div style="padding-bottom: 10px;">
+                        <form action="/photos/<%= photo._id %>/like" method="POST">
+                            <div class="btn-group">
+                                <% if (currentUser && photo.likes.some(function (like) {
+                                    return like.equals(currentUser._id)
+                                })) { %>
+                                <button class="btn btn-sm btn-primary">
+                                    <i class="fas fa-thumbs-up"></i> Liked (<%= photo.likes.length %>)
+                                </button>
+                                <% } else { %>
+                                <button id="like" class="btn-default btn-sm ">
+                                    <i class="fas fa-thumbs-up"></i> Like (<%= photo.likes.length %>)
+                                </button>
+                                <% } %>
+                            </div>
+                        </form>
+                    </div>
+					<!-- end -->
+					<p><%= photo.description %></p>
+					<p>
+						<em>Submitted by: <a href="/users/<%= photo.author.id %>"><%= photo.author.username %></a>, <%= moment(photo.createdAt).fromNow() %></em>
+					</p>
+					<% if(currentUser && photo.author.id.equals(currentUser._id) || currentUser && currentUser.isAdmin) { %>
+						<a class="btn btn-primary" href="/photos/<%= photo._id %>/edit">Edit</a>
+						<form class="delete-form" action="/photos/<%= photo._id %>?_method=DELETE" method="POST">
+							<button onclick="return confirm('Are you sure you want to delete this photo?');" class="btn btn-primary">Delete</button>
+						</form>
+					<% } %>
+				</div>
+			</div>
+			<!-- Comment Section -->
+			<div class="well">
+				<h3><em><strong>Comments</strong></em></h3>
+				<% if (photo.comments === undefined || photo.comments.length === 0) { %>
+    				<p>No comments yet ...</p>
+				<% } %>
+				<% photo.comments.forEach(function(comment){ %>
+				<div class="row existing-comments">
+					<div class="col-md-12">
+						<h4><strong><i class="fas fa-user"></i> <%= comment.author.username  %></strong></h4>
+						<span class="pull-right"><%= moment(comment.createdAt).fromNow() %></span>
+						<p><%= comment.text %></p>
+						<% if(currentUser && comment.author.id.equals(currentUser._id) || currentUser && currentUser.isAdmin){ %>
+							<a class="btn btn-xs"
+							   href="/photos/<%= photo._id %>/comments/<%= comment._id %>/edit">Update
+							</a>
+							<form class="delete-form" action="/photos/<%= photo._id %>/comments/<%= comment._id %>?_method=DELETE" method="POST">
+								<input onclick="return confirm('Are you sure you want to delete this comment?');" type="submit" class="btn btn-xs btn-primary" value="Delete">
+							</form>
+						<% } %>
+					</div>
+				</div>
+				<% }) %>
+				<!-- new comment -->
+				<div class="new-comment">
+					<form action="/photos/<%= photo._id %>/comments" method="POST">
+						<div class="form-group">
+							<textarea class="form-control" type="text" name="comment[text]" placeholder="Add a comment here ..." rows="3" cols="30"></textarea>
+						</div>
+						<div class="form-group">
+							<button id="btn-add-comment" class="btn">Add Comment</button>
+						</div>
+					</form>
+				</div>
+				<!-- end -->
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<!-- Google Maps -->
+<script>
+  function initMap() {
+    var lat = <%= photo.lat %>;
+    var lng = <%= photo.lng %>;
+    var center = {lat: lat, lng: lng };
+    var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 8,
+        center: center,
+        scrollwheel: false
+    });
+    var contentString = `
+      <strong><%= photo.name %><br />
+      <%= photo.location %></strong>
+      <p><%= photo.description %></p>
+    `
+    var infowindow = new google.maps.InfoWindow({
+      content: contentString
+    });
+    var marker = new google.maps.Marker({
+        position: center,
+        map: map
+    });
+    marker.addListener('click', function() {
+      infowindow.open(map, marker);
+    });
+  }
+</script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBZkP4LBereEscbN449e8Q-DjiGbxdcK50&callback=initMap"></script>
+
+<%- include("../partial/footer") %>
+
+
+
+
+
