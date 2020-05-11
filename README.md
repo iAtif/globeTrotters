@@ -1,6 +1,6 @@
 <h3>Description</h3>
 This app is a prod-ready website, implemented with robust and meaningful features for all the travel enthusiasts around the world to share their idiosyncratic photos and gain a following.
-
+<p></p>
 <p>Link to the site: https://globetrotterslive.herokuapp.com</p>
 
 <h3>Features</h3>
