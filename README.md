@@ -15,7 +15,7 @@ This app is a prod-ready website, implemented with robust and meaningful feature
 <h3>Technologies Used</h3>
 
 * Javascript
-* node.JS
+* Node.js
 * Express
 * Passport
 * Bootstrap 
