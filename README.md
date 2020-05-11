@@ -3,17 +3,17 @@ This app is a prod-ready website, implemented with robust and meaningful feature
 Link to the site: https://globetrotterslive.herokuapp.com
 
 <h3>Features</h3>
-- Add/Edit/Remove posts or comments
-- Like a post! keep track of number of likes
-- Signup, Login (as an Admin or non-Admin) with your own profile and customize it
-- Add location and show it on integrated Google Maps
+* Add/Edit/Remove posts or comments
+* Like a post! keep track of number of likes
+* Signup, Login (as an Admin or non-Admin) with your own profile and customize it
+* Add location and show it on integrated Google Maps
 
 <h3>Technologies Used</h3>
-- Javascript
-- node.JS
-- Express
-- Passport
-- Bootstrap
+* Javascript
+* node.JS
+* Express
+* Passport
+* Bootstrap
 
 
 
